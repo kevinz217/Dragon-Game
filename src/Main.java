@@ -1,5 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("lalalala");
+        DragonSlayer game = new DragonSlayer();
+        game.play();
     }
 }
+
