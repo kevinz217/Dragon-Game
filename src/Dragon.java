@@ -32,6 +32,11 @@ public class Dragon {
         this.health = health;
     }
 
+    public void setAlive(boolean bool) {
+        alive = bool;
+    }
+
+
     public int attack() {
         return level * (int) ((Math.random() * 9) + 1);
     }

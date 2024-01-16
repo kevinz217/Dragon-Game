@@ -1,5 +1,6 @@
 public class Room {
     private static int ROOMS_CLEARED = 0;
+    private static int TOTAL_DRAGONS_KILLED = 0;
     String name;
     Dragon[] dragons;
     boolean hasSearched;
@@ -42,6 +43,13 @@ public class Room {
             System.out.println("You cannot search here in combat!");
         } else if (hasSearched) {
             System.out.println("You have already searched this room!");
+        }
+    }
+
+    public void nextDragon() {
+        if (!dragons[0].alive) {
+            TOTAL_DRAGONS_KILLED++;
+
         }
     }
 

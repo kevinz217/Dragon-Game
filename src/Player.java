@@ -54,4 +54,11 @@ public class Player {
         System.out.println(str);
     }
 
+    public void gameOver() {
+        System.out.println("Sorry player, you have died!");
+        System.out.println("--------------------");
+        System.out.println("|  ! GAME OVER !   |");
+        System.out.println("--------------------");
+        System.exit(0);
+    }
 }
