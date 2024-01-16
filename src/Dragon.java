@@ -10,9 +10,14 @@ public class Dragon {
     }
 
     public Dragon(int level) {
-        level = 4;
-        health = 1000;
-        alive = true;
+        if (level == 1) {
+            health = 130;
+            alive = true;
+        }
+        if (level == 4) {
+            health = 1000;
+            alive = true;
+        }
     }
 
     public int getLevel() {
@@ -22,4 +27,13 @@ public class Dragon {
     public int getHealth() {
         return health;
     }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int attack() {
+        return level * (int) ((Math.random() * 9) + 1);
+    }
+
 }

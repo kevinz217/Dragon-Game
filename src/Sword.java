@@ -11,7 +11,15 @@ public class Sword {
         return damage;
     }
 
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
     public int getDodge() {
         return dodge;
+    }
+
+    public void setDodge(int dodge) {
+        this.dodge = dodge;
     }
 }

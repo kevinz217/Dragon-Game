@@ -26,13 +26,18 @@ public class Player {
     }
 
     public void takeDamage(int damage) {
-        health -= damage;
-        System.out.println("You took " + damage + "!");
+        double chance = (double) Math.round(Math.random() * 100) / 100;
+        if (chance > ((double) sword.getDodge() / 100)) {
+            health -= damage;
+            System.out.println("You took " + Colors.RED + damage + Colors.RESET + " damage!");
+        } else {
+            System.out.println(Colors.CYAN + "Lucky!" + Colors.RESET + " You dodged the attack!");
+        }
     }
 
     public void usePot() {
         if (healthPotStatus) {
-            health += 35;
+            health += 40;
             healthPotStatus = false;
             System.out.println("You healed for 35 health!");
         } else {
