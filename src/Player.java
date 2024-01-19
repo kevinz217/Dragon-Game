@@ -25,6 +25,11 @@ public class Player {
         return damage;
     }
 
+    public void gainGold(int goldGain) {
+        System.out.println("You have gained " + Colors.YELLOW + goldGain + Colors.RESET + " gold!");
+        gold += goldGain;
+    }
+
     public void takeDamage(int damage) {
         double chance = (double) Math.round(Math.random() * 100) / 100;
         if (chance > ((double) sword.getDodge() / 100)) {
@@ -37,9 +42,10 @@ public class Player {
 
     public void usePot() {
         if (healthPotStatus) {
-            health += 40;
+            int heal = (int) ((100 - health) / 1.5);
+            health += heal;
             healthPotStatus = false;
-            System.out.println("You healed for 35 health!");
+            System.out.println("You healed for " + heal + " health!");
         } else {
             System.out.println("You don't have a healing pot!");
         }
