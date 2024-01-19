@@ -8,9 +8,6 @@ public class Room {
     public Room(String name) {
         this.name = name;
         hasSearched = false;
-    }
-
-    public void createDragons() {
         int random = (int) (Math.random() * 3) + 1;
         dragons = new Dragon[random];
         for (int i = 0; i < random; i++) {
@@ -35,9 +32,9 @@ public class Room {
             if (chance > 0.5) {
                 System.out.println("You found a health pot!");
                 hasSearched = true;
-                System.out.println(Colors.RED + " ooooh you have to remember to add rh code for the pot oohh" + Colors.RESET);
             } else {
                 System.out.println("You found nothing...");
+                hasSearched = true;
             }
         } else if(!canSearch) {
             System.out.println("You cannot search here in combat!");
@@ -49,8 +46,21 @@ public class Room {
     public void nextDragon() {
         if (!dragons[0].alive) {
             TOTAL_DRAGONS_KILLED++;
-
+            if (dragons.length != 1) {
+                Dragon[] temp = new Dragon[dragons.length - 1];
+                for (int i = 0; i < temp.length; i++) {
+                    temp[i] = dragons[i + 1];
+                }
+                dragons = temp;
+            } else if (dragons.length == 1 && !dragons[0].alive) {
+                System.out.println("PLACEHOLDER MESSAGE");
+                ROOMS_CLEARED++;
+            }
         }
+    }
+
+    public Dragon currentDragon() {
+        return dragons[0];
     }
 
 
