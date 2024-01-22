@@ -91,4 +91,15 @@ public class Room {
         }
     }
 
+    public boolean checkAllDragons() {
+        for (Dragon dragon : dragons) {
+            if (dragon.isAlive()) {
+                // if one is alive it will be false
+                return false;
+            }
+        }
+        // all dragons are dead;
+        return true;
+    }
+
 }

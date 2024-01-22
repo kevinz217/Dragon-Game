@@ -7,10 +7,13 @@ public class DragonSlayer {
     private Room currentRoom;
     private boolean something;
 
+    private boolean fightBool;
+
     public DragonSlayer() {
         this.player = null;
         currentRoom = null;
         something = true;
+        fightBool = true;
     }
 
     public void play() {
@@ -18,11 +21,10 @@ public class DragonSlayer {
         while (Room.getRoomsCleared() != 5) {
             makeRoom();
             while (something) {
-                if (Room.getRoomClear()) {
-                    afterFightMenu();
-                    System.out.println("???? is this working");
-                } else {
+                if (fightBool) {
                     fightMenu();
+                } else if (!fightBool) {
+                    afterFightMenu();
                 }
             }
         }
@@ -77,7 +79,6 @@ public class DragonSlayer {
             System.out.print("What's your next move? ");
             choice = SCANNER.nextLine().toLowerCase();
             processChoice1(choice);
-            System.out.println(Room.getRoomClear());
         }
     }
     public void afterFightMenu() {
@@ -127,6 +128,9 @@ public class DragonSlayer {
         } else {
             player.gainGold((dragon.getLevel() * 3) + 7);
             currentRoom.nextDragon();
+            if (currentRoom.checkAllDragons()) {
+                fightBool = false;
+            }
         }
     }
 
