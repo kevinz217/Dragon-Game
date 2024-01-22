@@ -39,11 +39,11 @@ public class Dragon {
     }
 
     public int attack() {
-        return level * (int) ((Math.random() * 9) + 1);
+        return (int) ((level * 0.85)  * (int) ((Math.random() * 9) + 1));
     }
 
     public void dragonInfo() {
-        String str = "Dragon";
+        String str = "Dragon Stats";
         str += "\n~~~~~~~~~~~~~";
         str += "\nLevel " + level;
         str += "\nHealth: " + health;

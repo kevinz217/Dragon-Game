@@ -1,30 +1,43 @@
 public class Room {
     private static int NUM_ROOMS_CLEARED = 0;
     private static int TOTAL_DRAGONS_KILLED = 0;
-    private static boolean ROOM_CLEARED = true;
-    private String name;
+    private boolean roomCleared;
+    private final String name;
     private Dragon[] dragons;
     private boolean hasSearched;
+    private Player player;
 
     public Room(String name) {
         this.name = name;
         hasSearched = false;
+        roomCleared = false;
+        // creates a array of dragons and assigns random dragons to that array
         int random = (int) (Math.random() * 3) + 1;
         dragons = new Dragon[random];
         for (int i = 0; i < random; i++) {
             dragons[i] = new Dragon();
         }
-        ROOM_CLEARED = false;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
     public String getName() {
         return name;
     }
 
-    public Dragon[] getDragons() {
-        return dragons;
+    public String getDragons() {
+        if (dragons.length == 1) {
+            return "one";
+        }
+        if (dragons.length == 2) {
+            return "two";
+        }
+        if (dragons.length == 3) {
+            return "three";
+        }
+        return null;
     }
-
 
     public Dragon currentDragon() {
         return dragons[0];
@@ -42,8 +55,8 @@ public class Room {
         return TOTAL_DRAGONS_KILLED;
     }
 
-    public static boolean getRoomClear() {
-        return ROOM_CLEARED;
+    public boolean isRoomClear() {
+        return roomCleared;
     }
 
 
@@ -60,6 +73,11 @@ public class Room {
             double chance = (double) Math.round(Math.random() * 100) / 100;
             if (chance > 0.5) {
                 System.out.println("You found a health pot!");
+                if (player.getHealthPotStatus()) {
+                    System.out.println("but... you already have one so you don't take it");
+                } else {
+                    player.gainPot();
+                }
                 hasSearched = true;
             } else {
                 System.out.println("You found nothing...");
@@ -84,8 +102,8 @@ public class Room {
                 }
                 dragons = temp;
             } else if (dragons.length == 1 && !dragons[0].alive) {
-                System.out.println("There are no more dragons in this room!");
-                ROOM_CLEARED = true;
+                System.out.println(Colors.GREEN + "\nThere are no more dragons in this room!" + Colors.RESET);
+                roomCleared = true;
                 NUM_ROOMS_CLEARED++;
             }
         }
@@ -99,6 +117,7 @@ public class Room {
             }
         }
         // all dragons are dead;
+        roomCleared = true;
         return true;
     }
 

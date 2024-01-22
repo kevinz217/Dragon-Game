@@ -9,7 +9,7 @@ public class Player {
         this.name = name;
         health = 100;
         gold = 0;
-        sword = new Sword(15, 20);
+        sword = new Sword(15, 25);
         healthPotStatus = false;
     }
 
@@ -39,6 +39,11 @@ public class Player {
         gold += goldGain;
     }
 
+    public void gainPot() {
+        healthPotStatus = true;
+    }
+
+
     public void takeDamage(int damage) {
         // calculates dodge chance and takes damage if the dodge does not happen
         double chance = (double) Math.round(Math.random() * 100) / 100;
@@ -65,11 +70,12 @@ public class Player {
     }
 
     public void upgrade() {
-        if (gold > 10) {
+        if (gold >= 10) {
             gold -= 10;
             double chance = (double) Math.round(Math.random() * 100) / 100;
             // decides if the upgrade will be small or big
             if (chance < 0.66) {
+                System.out.println("You got a small upgrade!");
                 sword.smallDamageUp();
                 sword.dodgeUp();
             } else {
@@ -78,16 +84,34 @@ public class Player {
                 sword.dodgeUp();
             }
         } else {
-            System.out.println("You don't have enough gold!");
+            System.out.println("You don't have enough gold! (requires 10)");
+        }
+    }
+
+    public void heal() {
+        if (gold >= 3) {
+            gold -= 3;
+            double chance = (double) Math.round(Math.random() * 100) / 100;
+            // decides if the healing will be small or big
+            if (chance < 0.66) {
+                System.out.println("You healed a small amount! (+20)");
+                health += 20;
+            } else {
+                System.out.println("You healed a large amount! (+40)");
+                health += 40;
+            }
+        } else {
+            System.out.println("You don't have enough gold! (requires 3)");
         }
     }
 
     public void playerInfo() {
-        String str = "";
+        String str = "\n";
         str += "Name: " + name;
         str += "\nHealth: " + health;
         str += "\nSword stats: " + sword.getDamage() + " damage" + ", " + sword.getDodge() + " dodge chance";
         str += "\nGold: " + gold;
+        str += "\nPotion status: " + healthPotStatus;
         System.out.println(str);
     }
 
