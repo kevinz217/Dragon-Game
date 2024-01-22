@@ -10,14 +10,10 @@ public class Dragon {
     }
 
     public Dragon(int level) {
+        //specific levels added for first and last dragon
         if (level == 1) {
             this.level = level;
             health = 130;
-            alive = true;
-        }
-        if (level == 3) {
-            this.level = level;
-            health = 1000;
             alive = true;
         }
         if (level == 4) {
@@ -31,19 +27,15 @@ public class Dragon {
         return level;
     }
 
-    public int getHealth() {
-        return health;
+    public boolean isAlive() {
+        return alive;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-        if (health <= 0) {
-            alive = false;
+    public void takeDamage(int health) {
+        this.health -= health;
+        if (0 >= this.health) {
+            this.alive = false;
         }
-    }
-
-    public void setAlive(boolean bool) {
-        alive = bool;
     }
 
     public int attack() {
@@ -51,7 +43,9 @@ public class Dragon {
     }
 
     public void dragonInfo() {
-        String str = "";
+        String str = "Dragon";
+        str += "\n~~~~~~~~~~~~~";
+        str += "\nLevel " + level;
         str += "\nHealth: " + health;
         str += "\nAlive status: " + alive;
         System.out.println(str);

@@ -1,6 +1,6 @@
 public class Sword {
-    int damage;
-    int dodge;
+    private int damage;
+    private int dodge;
 
     public Sword(int damage, int dodge) {
         this.damage = damage;
@@ -11,27 +11,27 @@ public class Sword {
         return damage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
     public int getDodge() {
         return dodge;
     }
 
-    public void setDodge(int dodge) {
-        this.dodge = dodge;
+    //upgrades for the sword
+    public void smallDamageUp() {
+        int dmgUp = (int) (Math.random() * 6) + 5;
+        damage += dmgUp;
+        System.out.println("Your sword does " + Colors.BLUE + dmgUp + Colors.RESET + " more damage!");
     }
 
-    public int smallDamageUp() {
-        return (int) (Math.random() * 6) + 5;
+    public void largeDamageUp() {
+        int dmgUp = (int) (Math.random() * 10) + 12;
+        damage += dmgUp;
+        System.out.println("Your sword does " + Colors.BLUE + dmgUp + Colors.RESET + " more damage!");
     }
 
-    public int dodgeUp() {
-        return (int) (Math.random() * 6) + 1;
+    public void dodgeUp() {
+        int dodgeUp = (int) (Math.random() * 6) + 1;
+        dodge += dodgeUp;
+        System.out.println("Your sword has " + Colors.BLUE + dodgeUp + Colors.RESET + " more dodge!");
     }
 
-    public int largeDamageUp() {
-        return (int) (Math.random() * 10) + 12;
-    }
 }

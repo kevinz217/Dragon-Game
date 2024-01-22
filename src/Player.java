@@ -1,9 +1,9 @@
 public class Player {
-    String name;
-    int health;
-    int gold;
-    boolean healthPotStatus;
-    Sword sword;
+    private String name;
+    private int health;
+    private int gold;
+    private boolean healthPotStatus;
+    private Sword sword;
 
     public Player(String name) {
         this.name = name;
@@ -13,7 +13,16 @@ public class Player {
         healthPotStatus = false;
     }
 
+    public int getGold() {
+        return gold;
+    }
+
+    public boolean getHealthPotStatus() {
+        return healthPotStatus;
+    }
+
     public int attack() {
+        // attacks will do 0-5 more or less damage
         int damage = sword.getDamage();
         int rand1 = (int) (Math.random() * 2);
         int rand2 = (int) (Math.random() * 6);
@@ -31,10 +40,14 @@ public class Player {
     }
 
     public void takeDamage(int damage) {
+        // calculates dodge chance and takes damage if the dodge does not happen
         double chance = (double) Math.round(Math.random() * 100) / 100;
         if (chance > ((double) sword.getDodge() / 100)) {
             health -= damage;
             System.out.println("You took " + Colors.RED + damage + Colors.RESET + " damage!");
+            if (health <= 0) {
+                gameOver();
+            }
         } else {
             System.out.println(Colors.CYAN + "Lucky!" + Colors.RESET + " You dodged the attack!");
         }
@@ -51,6 +64,24 @@ public class Player {
         }
     }
 
+    public void upgrade() {
+        if (gold > 10) {
+            gold -= 10;
+            double chance = (double) Math.round(Math.random() * 100) / 100;
+            // decides if the upgrade will be small or big
+            if (chance < 0.66) {
+                sword.smallDamageUp();
+                sword.dodgeUp();
+            } else {
+                System.out.println("You got a large upgrade!");
+                sword.largeDamageUp();
+                sword.dodgeUp();
+            }
+        } else {
+            System.out.println("You don't have enough gold!");
+        }
+    }
+
     public void playerInfo() {
         String str = "";
         str += "Name: " + name;
@@ -60,11 +91,13 @@ public class Player {
         System.out.println(str);
     }
 
+
     public void gameOver() {
         System.out.println("Sorry player, you have died!");
         System.out.println("--------------------");
         System.out.println("|  ! GAME OVER !   |");
         System.out.println("--------------------");
+        System.out.println("Try again another time!");
         System.exit(0);
     }
 }
