@@ -173,7 +173,6 @@ public class DragonSlayer {
 
     //processes choice in the post-battle phase
     public void processChoice2(String choice) {
-        Dragon dragon = currentRoom.currentDragon();
         if (choice.equals("c")) {
             player.playerInfo();
         } else if (choice.equals("s")) {
