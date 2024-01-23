@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class DragonSlayer {
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    private int highestScore = 0;
+    private int highestScore;
     private Player player;
     private Room currentRoom;
     private boolean something;
@@ -13,6 +13,7 @@ public class DragonSlayer {
         currentRoom = null;
         something = true;
         fightBool = true;
+        highestScore = 0;
     }
 
     public void play() {
@@ -220,15 +221,20 @@ public class DragonSlayer {
     public void askReplay() {
         String ans = "";
 
-        while (!ans.equals("y") || !ans.equals("n"))
-        System.out.println("Would you like to play again? (y/n)");
-        ans = SCANNER.nextLine().toLowerCase();
-        if (ans.equals("y")) {
-            play();
-        } else if (ans.equals("n")) {
-            System.out.println("Goodbye then!");
-        } else {
-            System.out.println("Invalid input try again!");
+        while (!ans.equals("y") || !ans.equals("n")) {
+            System.out.println("Would you like to play again? (y/n)");
+            ans = SCANNER.nextLine().toLowerCase();
+            if (ans.equals("y")) {
+                Room.resetRoomsCleared();
+                Room.resetDragonsKilled();
+                something = true;
+                fightBool = true;
+                play();
+            } else if (ans.equals("n")) {
+                System.out.println("Goodbye then!");
+            } else {
+                System.out.println("Invalid input try again!");
+            }
         }
     }
 }

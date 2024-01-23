@@ -50,10 +50,12 @@ public class Room {
     public static int getRoomsCleared() {
         return NUM_ROOMS_CLEARED;
     }
+    public static void resetRoomsCleared() { NUM_ROOMS_CLEARED = 0;}
 
     public static int getTotalDragonsKilled() {
         return TOTAL_DRAGONS_KILLED;
     }
+    public static void resetDragonsKilled() { TOTAL_DRAGONS_KILLED = 0;}
 
     public boolean isRoomClear() {
         return roomCleared;
