@@ -231,6 +231,7 @@ public class DragonSlayer {
                 play();
             } else if (ans.equals("n")) {
                 System.out.println("Goodbye then!");
+                System.exit(0);
             } else {
                 System.out.println("Invalid input try again!");
             }
